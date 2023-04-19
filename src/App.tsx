@@ -1,4 +1,27 @@
-const App = () => {
+import { useState, ChangeEvent } from 'react'
+
+const App = (): JSX.Element => {
+  const [term, setTerm] = useState<string>('')
+
+  const getSearchOptions = (value: string) => {
+    fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${
+        process.env.REACT_APP_API_KEY
+      }`
+    )
+      .then((res) => res.json())
+      .then((data) => console.log({ data }))
+  }
+
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // const value = e.target.value - the same as - const {value} = e.target
+    const value = e.target.value.trim()
+    setTerm(value)
+
+    if (value === '') return
+    getSearchOptions(value)
+  }
+
   return (
     <main className="flex justify-center items-center h-[100vh] w-full ">
       <section
@@ -15,8 +38,9 @@ const App = () => {
         <div className="flex m-auto mt-10 md:mt-4 ">
           <input
             type="text"
-            value={''}
+            value={term}
             className="px-2 py-1 rounded-l-md border-2 border-white"
+            onChange={onInputChange}
           />
           <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer">
             Search
