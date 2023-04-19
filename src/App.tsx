@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from 'react'
 
 const App = (): JSX.Element => {
   const [term, setTerm] = useState<string>('')
+  const [options, setOptions] = useState<[]>([])
 
   const getSearchOptions = (value: string) => {
     fetch(
@@ -10,7 +11,7 @@ const App = (): JSX.Element => {
       }`
     )
       .then((res) => res.json())
-      .then((data) => console.log({ data }))
+      .then((data) => setOptions(data))
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +36,22 @@ const App = (): JSX.Element => {
           Enter below a place you want to know the weather of and select an
           option from the dropdown
         </p>
-        <div className="flex m-auto mt-10 md:mt-4 ">
+        <div className="relative flex m-auto mt-10 md:mt-4 ">
           <input
             type="text"
             value={term}
             className="px-2 py-1 rounded-l-md border-2 border-white"
             onChange={onInputChange}
           />
+          <ul className="absolute top-9 bg-white ml-1 rounded-b-md">
+            {options.map((option: { name: string }, index: number) => (
+              <li key={option.name + '-' + index}>
+                <button className="text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer">
+                  {option.name}
+                </button>
+              </li>
+            ))}
+          </ul>
           <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer">
             Search
           </button>
