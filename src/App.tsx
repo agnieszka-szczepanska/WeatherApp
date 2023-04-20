@@ -26,6 +26,13 @@ const App = (): JSX.Element => {
 
   const onOptionSelect = (option: optionType) => {
     console.log(option.name)
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${option.lat}&lon=${option.lon}&appid=${process.env.REACT_APP_API_KEY}
+      `
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data))
   }
 
   return (
