@@ -1,9 +1,10 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { optionType } from './types'
 
 const App = (): JSX.Element => {
   const [term, setTerm] = useState<string>('')
   const [options, setOptions] = useState<[]>([])
+  const [city, setCity] = useState<optionType | null>(null)
 
   const getSearchOptions = (value: string) => {
     fetch(
@@ -24,16 +25,28 @@ const App = (): JSX.Element => {
     getSearchOptions(value)
   }
 
-  const onOptionSelect = (option: optionType) => {
-    console.log(option.name)
-
+  const getForecast = (city: optionType) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${option.lat}&lon=${option.lon}&appid=${process.env.REACT_APP_API_KEY}
+      `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=${process.env.REACT_APP_API_KEY}
       `
     )
       .then((res) => res.json())
       .then((data) => console.log(data))
   }
+  const onSubmit = () => {
+    if (!city) return
+    getForecast(city)
+  }
+  const onOptionSelect = (option: optionType) => {
+    setCity(option)
+  }
+
+  useEffect(() => {
+    if (city) {
+      setTerm(city.name)
+      setOptions([])
+    }
+  }, [city])
 
   return (
     <main className="flex justify-center items-center h-[100vh] w-full ">
@@ -67,7 +80,10 @@ const App = (): JSX.Element => {
               </li>
             ))}
           </ul>
-          <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer">
+          <button
+            onClick={onSubmit}
+            className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer"
+          >
             Search
           </button>
         </div>
