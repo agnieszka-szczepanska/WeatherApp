@@ -1,5 +1,6 @@
 import Search from './components/Search'
-import useForecast from './components/hooks/useForecast'
+import Forecast from './components/Forecast'
+import useForecast from './hooks/useForecast'
 
 const App = (): JSX.Element => {
   const { term, options, forecast, onInputChange, onOptionSelect, onSubmit } =
@@ -7,7 +8,7 @@ const App = (): JSX.Element => {
   return (
     <main className="flex justify-center items-center h-[100vh] w-full ">
       {forecast ? (
-        'We have forecast'
+        <Forecast data={forecast} />
       ) : (
         <Search
           term={term}
