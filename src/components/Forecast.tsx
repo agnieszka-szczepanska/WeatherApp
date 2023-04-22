@@ -17,6 +17,15 @@ const Forecast = ({ data }: Props): JSX.Element => {
             {Math.round(today.main.temp)}
             <sup>o</sup>
           </h1>
+          <p className="text-sm">
+            {today.weather[0].main} {today.weather[0].description}
+          </p>
+          <p className="text-sm">
+            H:{Math.ceil(today.main.temp_max)}
+            <sup>o</sup> L:
+            {Math.floor(today.main.temp_min)}
+            <sup>o</sup>
+          </p>
         </section>
       </div>
     </div>
