@@ -27,6 +27,28 @@ const Forecast = ({ data }: Props): JSX.Element => {
             <sup>o</sup>
           </p>
         </section>
+        <section className="flex overflow-x-scroll mt-4 pb-2 mb-5">
+          {data.list.map((item, index) => (
+            <div
+              className="inline-block text-center width=[50px] flex-shrink-0"
+              key={index}
+            >
+              <p className="text-sm">
+                {index === 0
+                  ? 'Now'
+                  : new Date(item.dt * 1000).getHours() + ':00'}
+              </p>
+              <img
+                alt={`weather-icon-${item.weather[0].description}`}
+                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+              />
+              <p className="text-sm font-bold">
+                {Math.round(item.main.temp)}
+                <sup>o</sup>
+              </p>
+            </div>
+          ))}
+        </section>
       </div>
     </div>
   )
