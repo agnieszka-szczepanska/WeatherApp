@@ -15,6 +15,7 @@ const useForecast = () => {
     )
       .then((res) => res.json())
       .then((data) => setOptions(data))
+      .catch((e) => console.log(e))
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +41,7 @@ const useForecast = () => {
 
         setForecast(forecastData)
       })
+      .catch((e) => console.log(e))
   }
   const onSubmit = () => {
     if (!city) return
