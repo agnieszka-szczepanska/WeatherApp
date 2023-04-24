@@ -2,6 +2,14 @@ import { getSunTime } from '../helpers'
 import { forecastType } from '../types'
 import Sunrise from './Icons/Sunrise'
 import Sunset from './Icons/Sunset'
+import Tile from './Tile'
+import {
+  //   getHumidityValue,
+  getWindDirection,
+  //   getVisibilityValue,
+  //   getSunTime,
+  //   getPop,
+} from './../helpers'
 
 type Props = {
   data: forecastType
@@ -52,13 +60,22 @@ const Forecast = ({ data }: Props): JSX.Element => {
             </div>
           ))}
         </section>
-        <section className="flex justify-between text-zinc-700">
+        <section className="flex flex-wrap justify-between text-zinc-700">
           <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
-            <Sunrise /> <span>{getSunTime(data.sunrise)}</span>
+            <Sunrise /> <span className="mt-2">{getSunTime(data.sunrise)}</span>
           </div>
           <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
-            <Sunset /> <span>{getSunTime(data.sunset)}</span>
+            <Sunset /> <span className="mt-2">{getSunTime(data.sunset)}</span>
           </div>
+          <Tile
+            icon="wind"
+            title="Wind"
+            info={`${Math.round(today.wind.speed)} km/h`}
+            description={`${getWindDirection(
+              Math.round(today.wind.deg)
+            )}, gusts 
+              ${today.wind.gust.toFixed(1)} km/h`}
+          />
         </section>
       </div>
     </div>
