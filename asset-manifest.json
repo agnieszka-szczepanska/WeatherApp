@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/agnieszka-szczepanska/github.io/WeatherApp/static/css/main.ea4edaae.css",
-    "main.js": "/agnieszka-szczepanska/github.io/WeatherApp/static/js/main.1c82fb05.js",
-    "index.html": "/agnieszka-szczepanska/github.io/WeatherApp/index.html",
-    "main.ea4edaae.css.map": "/agnieszka-szczepanska/github.io/WeatherApp/static/css/main.ea4edaae.css.map",
-    "main.1c82fb05.js.map": "/agnieszka-szczepanska/github.io/WeatherApp/static/js/main.1c82fb05.js.map"
+    "main.css": "/agnieszka-szczepanska.github.io/WeatherApp/static/css/main.ea4edaae.css",
+    "main.js": "/agnieszka-szczepanska.github.io/WeatherApp/static/js/main.1c82fb05.js",
+    "index.html": "/agnieszka-szczepanska.github.io/WeatherApp/index.html",
+    "main.ea4edaae.css.map": "/agnieszka-szczepanska.github.io/WeatherApp/static/css/main.ea4edaae.css.map",
+    "main.1c82fb05.js.map": "/agnieszka-szczepanska.github.io/WeatherApp/static/js/main.1c82fb05.js.map"
   },
   "entrypoints": [
     "static/css/main.ea4edaae.css",
